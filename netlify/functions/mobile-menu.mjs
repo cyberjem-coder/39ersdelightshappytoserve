@@ -23,8 +23,6 @@ export default async function handler(request) {
   }
 
   if (request.method === "PUT") {
-    if (!(await verifyStoreKey(request, { registerIfMissing: true }))) {
-      return json({ ok: false, message: "This POS device is not authorized to publish the menu." }, 403);
     }
     let body;
     try { body = await request.json(); }
