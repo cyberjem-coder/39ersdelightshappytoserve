@@ -12,8 +12,6 @@ export default async function handler(request) {
       if (!order) return json({ ok: false, message: "Order not found." }, 404);
       return json({ ok: true, order: { token: order.token, code: order.code, status: order.status } });
     }
-
-    if (!(await verifyStoreKey(request))) return json({ ok: false, message: "POS device not authorized." }, 403);
     const status = (url.searchParams.get("status") || "PENDING").toUpperCase();
     if (!["PENDING", "CONFIRMED", "REJECTED"].includes(status)) {
       return json({ ok: false, message: "Invalid order status." }, 400);
